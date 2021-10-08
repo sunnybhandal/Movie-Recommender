@@ -21,6 +21,7 @@ def vectorize_text(df):
 
     return cosine_sim
 
+@st.cache
 def get_recommendations(title, cosine_sim, df, num_of_rec = 5):
     df = df.reset_index()
     indices = pd.Series(df.index, index=df['title'])
@@ -55,6 +56,7 @@ def main():
 
     if choice == "Home":
         st.subheader("Home")
+        st.text("Sample Data")
         st.dataframe(df.head(10))
         
     elif choice == "Recommend":
@@ -66,6 +68,9 @@ def main():
             if search_term is not None:
                 try:
                     result = get_recommendations(search_term, cosine_sim, df, num_of_rec)
+                    with st.expander("Results as JSON"):
+                        results_json = result.to_dict()
+                        st.write(results_json)
                 except Exception as e:
                     result = "Not Found"
 
