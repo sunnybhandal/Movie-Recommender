@@ -9,3 +9,6 @@ File: mini_data.csv
 
 ### Packages
 Pandas, NumPy, Sklearn, Streamlit
+
+### Run App
+In Command Line: streamlit run movie_recom.py
